@@ -16,18 +16,10 @@ export const Card = styled.div`
         box-shadow: 0 8px 12px rgba(0, 0, 0, 0.4); /* Add a stronger shadow on hover */
       }
 `;
-
-export const Title = styled.h1`
-    text-align: center;
-    margin-bottom: 40px;
-`;
-
-export const Text = styled.p`
-    text-align: center;
-    width:150px;
-    color: black;
-    padding: 10px;
-`;
 export const Box = styled.li`
     width: 200px
 `;
+export const Text = styled.p`
+    line-height: 1.4;
+    font-size: 14px;
+`

@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
+import Button from "components/Button/Button"
 import {searchMovies} from "../Api"
+import {Container,Card,Box, Text,TextSpan, Form, Input, ButtonInput} from "./Movie.styled"
 
 const Movies = () =>{
     const [movieName, setMovieName] = useState("")
@@ -24,24 +26,32 @@ const Movies = () =>{
 
     return(
         <div>
-            <form onSubmit={onSubmit}>
-                <input type="text" name="name"/>
-                <button type="submit">search</button>    
-            </form>
-            <p>We are looking for: {movieName}</p>
-            <ul>
+       
+            <Text>We are looking for:  <TextSpan>{movieName}</TextSpan></Text>
+            <Form onSubmit={onSubmit}>
+                <Input type="text" name="name"/>
+                <ButtonInput type="submit">search</ButtonInput>    
+            </Form>
+           
+            <Container>
                 {movie.map(({original_title,poster_path,backdrop_path,id})=>
                 <li key={id}>
-                    <Link key={id} to={`${id}`}>
-                        <img src={"https://image.tmdb.org/t/p/w200/"+poster_path} alt={backdrop_path} />
-                        <p> {original_title}</p>
+                    <Link to={`${id}`}>
+                        <Card>
+                            <img src={poster_path ?("https://image.tmdb.org/t/p/w200/"+ poster_path):("https://image.tmdb.org/t/p/w200/wwemzKWzjKYJFfCeiB57q3r4Bcm.png")} alt={original_title} />
+                            <Text> {original_title}</Text>
+                        </Card>    
                     </Link>
                 </li>
                 )}
-            </ul>
-            {movie.length >0 && (<button onClick={addMore}>load more</button>)}
+                <Box><span></span></Box>
+                <Box><span></span></Box>  
+            </Container>
+            {movie.length >0 && (<Button onClick={addMore}/>)}
         </div>
     )
 }
 
 export default Movies
+
+// <img src={"https://image.tmdb.org/t/p/w200/"+poster_path} alt={backdrop_path} />

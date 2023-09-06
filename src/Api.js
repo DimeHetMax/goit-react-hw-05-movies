@@ -27,7 +27,17 @@ export const searchMovieById = async (id) =>{
         const res = await axios.get(`/movie/${id}?language=en-US`)
         return res.data
     } catch (error) {
-        console.log(error)
+        if (error.response && error.response.status === 404) {
+            console.log('Movie not found.');
+            return {poster_path:"/wwemzKWzjKYJFfCeiB57q3r4Bcm.png",
+                    original_title:"No Info",
+                    vote_average:0,
+                    overview:"Lorem ipsum dolor sit amet consectetur, adipisicing elit. Recusandae laudantium soluta tempora modi molestiae magnam perferendis, est corrupti consequatur. Eaque.",
+                    };
+          } else {
+            console.log(error);
+            throw error;
+          }
     }
 }
 

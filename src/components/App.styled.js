@@ -19,6 +19,6 @@ export const StyledLink = styled(NavLink)`
     margin-right: 10px;
 
     &.active {
-    color: orange;
+    color: #ffa500;
     }
 `;
