@@ -47,7 +47,16 @@ export const Text = styled.p`
     line-height: 1.4;
     font-size: 16px;
 `
-
+export const ContainerIcon = styled.div`
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-left:10px;
+    color:#000000;
+    &:hover {
+        color:#ffa500;
+    }
+`
 // border-bottom: 2px solid #ccc;
 // box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 // background: #ffecd3;

@@ -23,3 +23,6 @@ export const Text = styled.p`
     line-height: 1.4;
     font-size: 14px;
 `
+export const LinkWiki = styled.a`
+      color:#000000;
+`

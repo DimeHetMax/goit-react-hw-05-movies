@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom"
 import {searchMoviesCastById} from "../../Api"
 import { useEffect, useState } from "react"
 import Loader from "components/Loader/Loader"
-import {Container, Card, Box, Text} from "./Cast.styled"
+import {Container, Card, Box, Text, LinkWiki} from "./Cast.styled"
 
 const Cast = () =>{
     const {movieId} = useParams()
@@ -29,12 +29,15 @@ const Cast = () =>{
                     {movie.length === 0 
                         ?(<li><div>No Cast information</div></li>)
                         :(movie.map(({id, original_name, popularity, profile_path, character})=> 
-                            <li key={id}>
+                            <li key={`${id}_${original_name}`}>
                                 <Card>
+                                <LinkWiki href={`https://en.wikipedia.org/wiki/`+original_name.replace(/ /g, '_')} target="_blank"
+                                rel="noopener noreferrer">
                                     <img src={profile_path ?("https://image.tmdb.org/t/p/w200/"+ profile_path):("https://image.tmdb.org/t/p/w200/wwemzKWzjKYJFfCeiB57q3r4Bcm.png")} alt={original_name} />
                                     <h3>{original_name}</h3>
                                     <Text>Character: {character}</Text>
                                     <Text>Popularity: {(popularity).toFixed(0)}%</Text>
+                                </LinkWiki>    
                                 </Card>
                             </li>
                             )

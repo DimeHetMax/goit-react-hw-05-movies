@@ -8,7 +8,6 @@ const Reviews =() =>{
     const [reviews, setReviews] = useState([])
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);  
-    console.log("review array",reviews)
     useEffect(()=>{
         setLoading(true)
         
