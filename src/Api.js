@@ -16,7 +16,9 @@ export const fetchedTrandingMovies = async () =>{
 export const searchMovies = async (movie, page) =>{
     try {
         const res = await axios.get(`/search/movie?query=${movie}&include_adult=false&language=en-US&page=${page}`)
-        return res.data.results
+    //    console.log(res)
+    //    console.log(res.data)
+        return res.data
     } catch (error) {
         console.log(error)
     }

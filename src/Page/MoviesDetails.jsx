@@ -1,6 +1,5 @@
-import { useEffect, useRef, useState } from "react";
-import { useParams, Link, useLocation } from "react-router-dom";
-import { Outlet } from "react-router-dom";
+import { useEffect,  useState , Suspense } from "react";
+import { useParams, Link, useLocation, Outlet } from "react-router-dom";
 import Loader from "components/Loader/Loader";
 import { IoArrowBack } from "react-icons/io5";
 import { searchMovieById } from "../Api"
@@ -10,17 +9,10 @@ const MoviesDetails = () => {
 
     const { movieId } = useParams()
     const [movie, setMovie] = useState({})
-    // const [genresFilm, setGenresFilm] =useState([])
-    // console.log("genresFilm",genresFilm)
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
-    // console.log(movie)
-    // console.log(movie.genres)
     const location = useLocation()
-    const locationRef = useRef(location.state)
-
-    // console.log("location in MovieDetails", location)
-    // console.log("location in MovieDetails REF", locationRef)
+    
     useEffect(() => {
         setLoading(true);
         setError(null);
@@ -30,12 +22,6 @@ const MoviesDetails = () => {
             .catch((error) => setError(error))
             .finally(() => setLoading(false))
     }, [movieId])
-
-    // useEffect(()=>{
-    //     if(movie){
-    //         movie.genres.map(gen =>setGenresFilm(gen))
-    //     }
-    // },[movie])
 
     if (loading) {
         return <Loader />;
@@ -47,7 +33,7 @@ const MoviesDetails = () => {
 
     return (
         <div>
-            <Link to={locationRef.current ?? "/"}>
+            <Link to={location.state?.from ?? "/"}>
                 <ContainerIcon>
                     <IoArrowBack />
                     <p>back</p>
@@ -71,14 +57,16 @@ const MoviesDetails = () => {
             <NavigationInfo>
                 <LinkInfoList>
                     <li>
-                        <StyledLink to="cast"> Cast</StyledLink>
+                        <StyledLink to="cast" state={{from: location.state.from}}> Cast</StyledLink>
                     </li>
                     <li>
-                        <StyledLink to="reviews">Reviews</StyledLink>
+                        <StyledLink to="reviews" state={{from: location.state.from}} >Reviews</StyledLink>
                     </li>
                 </LinkInfoList>
             </NavigationInfo>
-            <Outlet />
+            <Suspense fallback={<Loader />}>
+                <Outlet />
+            </Suspense>
         </div>
     )
 }

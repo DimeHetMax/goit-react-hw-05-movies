@@ -51,7 +51,7 @@ export const ContainerIcon = styled.div`
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    padding-left:10px;
+    padding: 5px 10px;
     color:#000000;
     &:hover {
         color:#ffa500;
